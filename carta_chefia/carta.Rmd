@@ -1,0 +1,17 @@
+---
+chefe: "Prof. Jomar Antonio Camarinha Filho"
+author: "Prof. Walmes Marques Zeviani"
+date: "Curitiba, 20 de Outubro de 2016"
+motivo: "Comunica viagem"
+closing: "Atensiosamente"
+digital-sign: assinatura.jpg
+output:
+  pdf_document:
+    template: template.tex
+---
+
+<!-- Escreva aqui o resumo do seminário. -->
+
+\lipsum[1-2]
+
+<!------------------------------------------- -->
