@@ -1,0 +1,15 @@
+---
+title: "A Origem das Espécies"
+author: "Charles Darwin"
+date: "20 de Outubro de 2016 - 16h - LEG"
+key-words: "Genética, mutação, DNA."
+output:
+  pdf_document:
+    template: template.tex
+---
+
+<!-- Escreva aqui o resumo do seminário. -->
+
+\lipsum[1-2]
+
+<!------------------------------------------- -->
