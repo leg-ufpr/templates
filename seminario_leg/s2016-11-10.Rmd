@@ -1,0 +1,26 @@
+---
+title: "A brief introduction to GAMLSS"
+author: "Luiz Ricardo Nakamura (ESALQ/USP)"
+date: "10 de Novembro de 2016 - 16h - LEG"
+key-words: "Generalized Additive Models, GAMLSS."
+output:
+  pdf_document:
+    template: template.tex
+---
+
+<!-- Escreva aqui o resumo do seminário. -->
+
+In all fields of science and technology the amount of data are growing
+rapidly. Analysing them can be more challenging than ever and hence
+powerful models should be used. In this sense, Rigby and Stasinopoulos
+(2005) proposed the generalised additive models for location, scale and
+shape (GAMLSS). GAMLSS are really flexible semi-parametric regression
+models that involve a distribution for the response variable (that does
+not necessarily belongs to the exponential family) and may involve
+parametric linear and/or non-parametric smoothing terms when modelling
+any or all of the parameters of the distribution as functions of
+explanatory variables. This talk will be a basic exposition about the
+GAMLSS models and how it can be applied in real life examples, using the
+R package.
+
+<!------------------------------------------- -->
