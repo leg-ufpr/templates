@@ -1,0 +1,192 @@
+---
+lecturer: Nome do Professor
+email: "`email@ufpr.br`"
+class: CE XYZ - Nome da Disciplina
+semester: Segundo Semestre de 2016
+output:
+  pdf_document:
+    template: template.tex
+---
+
+```{r arguments, include=FALSE}
+file <- "RelatoriodeDiariodeClasseExcel.xls"
+nrows <- 60
+```
+
+```{r my-functions, include=FALSE}
+#' @title Função para Captalizar Palavras
+#' @param s Um vetor de strings.
+#' @param strict Se \code{TRUE} significa que o vetor já está em caixa
+#'     baixa.
+#' @return Retorna um vetor de strings do mesmo comprimento do fornecido
+#'     em \code{s} com as palavras captalizadas. Essa função captaliza
+#'     todas as palavras, como preposições e artigos.
+#' @examples
+#'
+#' capwords("walmes zeviani")
+#' capwords("waLMES zeviani", strict = TRUE)
+#' capwords("waLMES zeviani", strict = FALSE)
+#'
+capwords <- function(s, strict = FALSE) {
+    cap <- function(s) {
+        paste(toupper(substring(s, 1, 1)), {
+            s <- substring(s, 2)
+            if (strict) {
+                tolower(s)
+            } else {
+                s
+            }
+        }, sep = "", collapse = " ")
+    }
+    sapply(strsplit(s, split = " "), cap,
+           USE.NAMES = !is.null(names(s)))
+}
+
+#' @title Função para Abreviar nomes Completos
+#' @param s Um vetor de strings.
+#' @return Retorna um vetor de strings do mesmo comprimento do fornecido
+#'     em \code{s} com os nomes abreviados.
+#' @examples
+#'
+#' abrevname("Walmes Marques Zeviani")
+#' abrevname("Paulo Justiniano Ribeiro Jr")
+#' abrevname("Eliane de Carvalho")
+#' abrevname("Eliane de Carvalho e Silva")
+#' abrevname("Eliane de Carvalho Silva de Souza")
+#'
+abrevname <- function(s) {
+    cap <- function(x) {
+        paste0(toupper(substr(x$s[x$i], 0, 1)), ".")
+    }
+    x <- sapply(s,
+                FUN = function(si) {
+                    r <- unlist(strsplit(si, "\\s+"))
+                    i <- grepl("^(d[ao]s?|de|e)$", x = r)
+                    j <- abs(rev(cumsum(rev(!i))) - length(r)) + 1
+                    L <- split(data.frame(s = r, i = !i,
+                                          stringsAsFactors = FALSE), j)
+                    n <- length(L)
+                    if (n > 2) {
+                        L[2:(n - 1)] <- lapply(L[2:(n - 1)], cap)
+                        L[c(1, n)] <- lapply(L[c(1, n)], "[[", 1)
+                        si <- paste(unlist(L), collapse = " ")
+                    } else {
+                        si
+                    }
+                })
+    return(x)
+}
+```
+
+```{r, include=FALSE}
+#-----------------------------------------------------------------------
+# Ler os dados.
+
+library(gdata)
+
+wd <- dirname(normalizePath(file))
+setwd(wd)
+
+nt <- read.xls(xls = basename(file),
+               sheet = 1,
+               fileEncoding =  "latin1",
+               stringsAsFactor = FALSE)
+
+title <- nt[3, 1] # Título.
+chair <- nt[4, 1] # Disciplina.
+profe <- abrevname(capwords(tolower(gsub(x = nt[5, 1], "^.*: ",  ""))))
+```
+
+<!-- Define o nome do professor pelo encontrado na planilha. -->
+\def\autolecturer{`r profe`}
+\def\autoclass{`r chair`}
+\def\autosemester{`r title`}
+
+```{r, include=FALSE}
+#-----------------------------------------------------------------------
+# Tabela.
+
+nt <- nt[7:nrow(nt), 3:4]
+names(nt) <- c("matr", "acad")
+str(nt)
+
+# Editar o nome dos alunos.
+x <- capwords(tolower(nt$acad))
+x <- abrevname(gsub(" D([aeo]s?) ", " d\\1 ", x))
+nt$acad <- x
+
+# Editar o GRR.
+nt$matr <- as.numeric(gsub(x = nt$matr, "\\D", ""))
+
+nt <- cbind(nt, matrix(NA, nrow(nt), 8))
+names(nt)[-c(1:2)] <- ""
+
+i <- which.max(nchar(nt$acad))
+maxname <- nt$acad[i]
+```
+
+<!-- Define comprimentos. -->
+\newlength{\maxname}
+\settowidth{\maxname}{`r maxname`00}
+\setlength{\tabcolsep}{4pt}
+
+\newlength{\maxgrr}
+\settowidth{\maxgrr}{000000000}
+
+\newlength{\tbwdt}
+\setlength{\tbwdt}{(\textwidth-21\tabcolsep-\maxname-\maxgrr)/8}
+
+```{r, include=FALSE}
+#-----------------------------------------------------------------------
+
+library(xtable)
+
+if (nrow(nt) > nrows) {
+    k <- ceiling(nrow(nt)/2)
+    L <- split(nt, rep(1:2, c(k, nrow(nt) - k)))
+    L <- lapply(L,
+                function(nt) {
+                    body <- print.xtable(xtable(nt,  digits = 0),
+                                         only.contents = TRUE,
+                                         include.rownames = FALSE,
+                                         include.colnames = FALSE,
+                                         hline.after = NULL)
+                    body <- append(body, "\\hline",
+                                   after = length(body))
+                    return(body)
+                })
+    body <- unlist(L)
+    body <- append(body, "\\pagebreak", after = 2)
+} else {
+    body <- print.xtable(xtable(nt,  digits = 0),
+                         only.contents = TRUE,
+                         include.rownames = FALSE,
+                         include.colnames = FALSE,
+                         hline.after = NULL)
+    body <- append(body, "\\hline",  after = length(body))
+}
+```
+
+\begin{center}
+\begin{longtable}{
+| x{\maxgrr}
+| p{\maxname}
+| p{\tbwdt}
+| p{\tbwdt}
+| p{\tbwdt}
+| p{\tbwdt}
+| p{\tbwdt}
+| p{\tbwdt}
+| p{\tbwdt}
+| p{\tbwdt}
+|}
+\hline \rowcolor{gray}
+\textbf{Matrícula} & \textbf{Acadêmico}
+ &  &  &  &  &  &  &  &  \\
+\hline \hline
+\endhead
+```{r, include=TRUE, echo=FALSE, results="asis"}
+cat(body, sep = "\n")
+```
+\end{longtable}
+\end{center}

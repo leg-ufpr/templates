@@ -1,0 +1,43 @@
+\documentclass[11pt]{article}
+\usepackage[brazil]{babel}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage[hmargin=1cm, vmargin=2cm, a4paper, landscape]{geometry}
+\usepackage{longtable}
+\usepackage{pdflscape}
+\usepackage{palatino}
+\usepackage{inconsolata}
+\usepackage[table]{xcolor}
+\usepackage{calc}
+\usepackage{array}
+\newcolumntype{x}[1]{>{\centering\arraybackslash\hspace{0pt}}p{#1}}
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+\renewcommand{\arraystretch}{1}
+\let\oldlongtable\longtable
+\let\endoldlongtable\endlongtable
+\renewenvironment{longtable}{
+  \rowcolors{2}{black!40}{white}\oldlongtable}{
+  \endoldlongtable}
+
+$if(class)$
+  \lhead{$class$\\ $if(semester)$ $semester$ $else$ \autosemester $endif$}
+$else$
+  \lhead{\autoclass\\ $if(semester)$ $semester$ $else$ \autosemester $endif$}
+$endif$
+
+$if(lecturer)$
+  \rhead{$lecturer$\\ $if(email)$ $email$ $endif$}
+$else$
+  \rhead{\autolecturer\\ $if(email)$ $email$ $endif$}
+$endif$
+
+\begin{document}
+
+$if(body)$
+  $body$
+$else$
+  Não gerou resultado!
+$endif$
+
+\end{document}
