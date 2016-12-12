@@ -1,0 +1,86 @@
+%-----------------------------------------------------------------------
+
+\documentclass[a4paper]{article}
+
+\usepackage[utf8]{inputenc}
+\usepackage[brazil]{babel}
+\usepackage[T1]{fontenc}
+\usepackage{inconsolata}
+\usepackage{mathpazo}
+
+\usepackage{indentfirst, graphicx, calc, setspace, icomma}
+\usepackage[hmargin={1.7cm, 1.7cm}, vmargin={1.7cm, 1.7cm}]{geometry}
+\usepackage{amsmath, amsfonts, mathrsfs, amssymb, amsthm} % , amsxtra
+\usepackage[hang]{caption}
+
+%-----------------------------------------------------------------------
+% Suporte ao R.
+
+$if(highlighting-macros)$
+$highlighting-macros$
+$endif$
+
+$if(graphics)$
+\usepackage{graphicx}
+\makeatletter
+\def\maxwidth{
+  \ifdim\Gin@nat@width>\linewidth\linewidth\else\Gin@nat@width\fi}
+\def\maxheight{
+  \ifdim\Gin@nat@height>\textheight\textheight\else\Gin@nat@height\fi}
+\makeatother
+\setkeys{Gin}{width=\maxwidth, height=\maxheight, keepaspectratio}
+$endif$
+
+%-----------------------------------------------------------------------
+% Definições feitas no template default para Latex do Rmarkdown.
+
+% Necessário para listas.
+\providecommand{\tightlist}{%
+  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+
+%-----------------------------------------------------------------------
+% Tikz.
+
+\usepackage{tikz}
+\usepackage{pgfplots}
+\usepackage{pgfplotstable}
+
+\usetikzlibrary{arrows, calc, matrix, positioning, trees,
+                decorations.pathmorphing, backgrounds, fit}
+
+%-----------------------------------------------------------------------
+% Definições.
+
+% Linhas horizontais.
+\newcommand{\HRule}{\noindent\rule{\linewidth}{0.2mm}}
+
+%-----------------------------------------------------------------------
+
+\begin{document}
+\pagestyle{empty}
+
+\HRule\\
+\noindent
+\begin{minipage}[t]{0.75\textwidth}
+  \baselineskip 12pt
+  $if(chair)$$chair$$if(class)$ - $class$$endif$\\ $endif$
+  $if(lecturer)$ \hfill $url$\\ $endif$
+  $if(lecturer)$$lecturer$$if(email)$ ($email$)$endif$\\ $endif$
+  $if(department)$$department$\\ $endif$
+  $title$ $if(date)$\hfill $date$$endif$\\
+  Acadêmico: \hfill grr: \hspace{2cm}
+\end{minipage}
+\hfill
+\begin{minipage}[t]{0.25\textwidth}
+  \begin{flushright}
+    \vspace*{-0.35cm}
+    \includegraphics[height=2cm]{ufpr_logo.png}
+  \end{flushright}
+\end{minipage}\\
+\HRule
+
+\hspace{0.5cm}
+
+$body$
+
+\end{document}

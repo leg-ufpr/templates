@@ -1,0 +1,130 @@
+---
+title: '**Probabilidades e Variáveis Aleatórias**'
+lecturer: Prof. Walmes Marques Zeviani
+email: '`walmes@ufpr.br`'
+department: Departamento de Estatística
+chair: CE002 - Bioestatística
+url: '`https://gitlab.c3sl.ufpr.br/walmes/ce001mb`'
+class: Ciências Biológias - MB
+date: 02/02/2016
+output:
+  pdf_document:
+    template: template.tex
+    keep_tex: true
+---
+
+```{r, include = FALSE}
+library(knitr)
+opts_chunk$set(fig.align = "center",
+               echo = FALSE,
+               message = FALSE,
+               warning = FALSE,
+               error =  FALSE,
+               results = "hide")
+
+# Adiciona `mathpazo` no preambulo que produz o standalone.
+# library(tikzDevice)
+# help(tikz, h = "html")
+options(tikzLatexPackages = c(
+            "\\usepackage{mathpazo}\n",
+            "\\usepackage{tikz}\n",
+            "\\usepackage[active, tightpage, psfixbb]{preview}\n",
+            "\\PreviewEnvironment{pgfpicture}\n",
+            "\\setlength\\PreviewBorder{0pt}\n"))
+
+system.file(package = "rmarkdown")
+```
+
+1. O circuito de dispositivos a seguir só opera se, e somente se,
+houver um caminho de dispositivos funcionais da esquerda para a
+direita. A probabilidade de cada componente funcionar é
+mostrada. Considere que os dispositivos falhem de maneira
+independente. Qual a probabilidade do circuito funcionar?
+
+```{r, include = FALSE}
+abc <- sample(c(0.9, 0.85, 0.77), 1)
+def <- sample(c(0.8, 0.95, 0.7), 1)
+```
+
+\begin{center}
+\def\ABC{`r abc`}
+\def\DEF{`r def`}
+\tikzset{
+  >=stealth,
+  terminal/.style={rectangle, minimum size=6mm, draw=black},
+  point/.style={coordinate},
+  draw=black,
+  mtx/.style={
+    matrix of nodes,
+    column sep=7mm, row sep=0mm,
+    nodes={draw, outer sep=5pt, fill=green!60!blue,
+      text width=2em, text centered}
+  },
+  every path/.style={rounded corners=1pt}
+}
+\begin{tikzpicture}
+  \matrix[mtx] (Y) {
+    \ABC &      & \\
+         & \DEF & \\
+    \ABC &      & \DEF \\
+         & \DEF & \\
+    \ABC &      & \\
+  };
+  \begin{scope}[on background layer]
+    \path[draw] (Y-3-1.east) -- (Y-3-1.west) -- ++(-0.5, 0);
+    \path[->, draw]
+    (Y-3-1.west)
+    |- (Y-1-1.east)
+    |- (Y-3-1.east)
+    -| (Y-2-2.west) -- (Y-2-2.east)
+    |- (Y-3-3.west) -- (Y-3-3.east) -- ++(0.5,0);
+    \path[draw]
+    (Y-3-1.west)
+    |- (Y-5-1.east)
+    |- (Y-3-1.east)
+    -| (Y-4-2.west) -- (Y-4-2.east)
+    |- (Y-3-3.west) -- (Y-3-3.east);
+  \end{scope}
+\end{tikzpicture}
+\end{center}
+
+2. Suponha que o número de pessoas por veículo de 4 passageiros que
+chega ao estacionamento de um shopping seja representado pela variável
+aleatória $X$ conforme descrito na tabela abaixo.
+
+```{r, echo = FALSE, results = "asis"}
+library(xtable)
+x <- 1:4
+px <- c(0.25, 0.4, 0.25, 0.1)
+print(xtable(data.frame("$x$" = x,
+                        "$\\Pr(x)$" = px,
+                        check.names = FALSE)),
+      include.rownames = FALSE,
+      sanitize.colnames.function = identity,
+      comment = FALSE,
+      timestamp = NULL)
+```
+
+Calcule:
+
+  a) A média da variável aleatória.
+  b) A variância da variável aleatória.
+
+3. Considere qua a função $f(x)$ seja uma função densidade de
+probabilidade
+
+$$
+f(x) = \begin{cases}
+  2 + 4 (x - 0.5), & 0 < x \leq 0.5 \\
+  2 + 4 (0.5 - x), & 0.5 < x < 1.
+\end{cases}
+$$
+
+```{r, echo = FALSE, dev = "tikz", fig.width = 5, fig.height = 4, fig.out = "0.7\\textwidth"}
+f <- function(x) {
+    2 + 4 * (x - 0.5) * (x <= 0.5) + 4 * (0.5 - x) * (x > 0.5)
+}
+curve(f, 0, 1, xlab = "$x$", ylab = "$f(x)$")
+```
+
+Calcule a $\Pr(0 < X < 0.4)$.
