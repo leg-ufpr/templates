@@ -1,0 +1,46 @@
+%  Montgomery, Cap7, ex 7-2, pg 144.
+\begin{defproblem}{distAmostralMedia_SEED_}
+
+<<include=FALSE>>=
+source("./funs.R")
+
+seed <- as.integer("_SEED_")
+if (isTRUE(seed >= 0)) {
+    set.seed(seed)
+} else {
+    set.seed(999)
+}
+
+n <- sample(c(10, 15, 20, 24), 1)
+m <- sample(8:12, 1)
+s <- sample(1:3, 1)
+
+p <- seq(0.75, 0.95, 0.05)
+i <- sample(1:length(p))
+p <- p[i]
+q <- round(qnorm(p), 2)
+
+A <- randomize(p)
+@
+
+\noindent Suponha que amostras de $n = \Sexpr{n}$ sejam selecionadas, ao
+acaso, de uma população normal com média igual a $\Sexpr{m}$ e
+desvio-padrão igual a $\Sexpr{s}$. Qual é a probabilidade de que a média
+amostral caia no intervalo de
+$\mu_{\bar{X}} - \Sexpr{q[1]} \sigma_{\bar{X}}$ a
+$\mu_{\bar{X}} + \Sexpr{q[1]} \sigma_{\bar{X}}$?
+
+\begin{inparaenum}[a)]
+<<echo=FALSE, results="asis">>=
+cat(formatitems(x = A$items, digits = 2), sep = "\n")
+@
+\end{inparaenum}
+
+\vspace{5em}
+
+  \begin{onlysolution}
+    \begin{solution}
+      \Sexpr{solution(A)}
+    \end{solution}
+  \end{onlysolution}
+\end{defproblem}

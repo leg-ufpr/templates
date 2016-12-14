@@ -1,0 +1,37 @@
+---
+title: '**Prova de Aproveitamento de Conhecimento**'
+lecturer: Prof. Walmes Marques Zeviani
+email: '`walmes@ufpr.br`'
+department: Departamento de Estatística
+chair: CE219 - Controle Estatístico da Qualidade
+url: '`https://gitlab.c3sl.ufpr.br/walmes/ce001mb`'
+class: Ciências Biológias - MB
+date: 02/02/2016
+exercises:
+  - distr-amostral
+# Se 0 indica que as provas são iguais, se 1 então são diferentes.
+varied: 1
+# Mostra ou não a solução: show & hide.
+answers: hide
+output:
+  pdf_document:
+    template: template.tex
+    keep_tex: true
+---
+
+<!-- \noindent Oi juventude. -->
+
+```{r, include = FALSE}
+library(rmarkdown)
+fls <- rmarkdown::yaml_front_matter("lista-aleatoria.Rmd")
+
+# Roda o arquivo para gerar as provas aleatórias.
+n <- 5
+for (f in fls) {
+    fl <- paste0(f, ".Rnw")
+    if (file.exists(fl)) {
+        system(sprintf("./Rnw2tex.R %s %d", fl, n))
+    }
+}
+```
+
