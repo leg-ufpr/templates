@@ -1,0 +1,60 @@
+---
+title: '**Exame Final**'
+lecturer: Prof. Walmes Marques Zeviani
+email: '`walmes@ufpr.br`'
+department: Departamento de Estatística
+chair: CE089 - Estatística Computacional II
+url: '`https://gitlab.c3sl.ufpr.br/walmes/ce089`'
+class: Estatística
+date: 02/02/2016
+exercises:
+#  - gna-expon
+#  - rotinas-gna
+#  - teste-aleat
+#  - jackknife-sd
+#  - monte-carlo-especiais
+  - gna-expon--rotinas-gna--teste-aleat--jackknife-sd--monte-carlo-especiais
+varied: 1
+answers: hide
+output:
+  pdf_document:
+    template: template.tex
+    keep_tex: true
+---
+
+\noindent Esta prova encerra às 20h40. Marque as alternativas de
+caneta. Respostas com rasuras ou que causem ambiguidade serão
+consideradas erradas. Cada questão vale dois pontos. Apenas com a
+resposta correta e com o desenvolvimento da solução se ganha os 2 pontos
+por questão. Boa prova.
+
+\hspace{0.5cm}
+
+```{r, include = FALSE, eval = FALSE}
+# cat(paste("-", dir(pattern = "\\.Rnw$")), sep = "\n")
+
+library(rmarkdown)
+fls <- rmarkdown::yaml_front_matter("ce089-exame.Rmd")
+fls <- paste0(fls$exercises, ".Rnw")
+
+# if (fls$varied == 1 & length(fls$exercises) > 0) {
+#     fls <- paste(paste0(fls$exercises, ".Rnw"), collapse = " ")
+# } else {
+#     fls <- paste0(fls$exercises, ".Rnw")
+# }
+# dput(fls)
+
+# Roda o arquivo para gerar as provas aleatórias.
+n <- 1
+for (f in fls) {
+    system(sprintf("./Rnw2tex.R %s %d", f, n))
+}
+
+```
+```{r, eval = FALSE, include = FALSE}
+fls <- "gna-expon.Rnw rotinas-gna.Rnw teste-aleat.Rnw jackknife-sd.Rnw monte-carlo-especiais.Rnw"
+n <- 4
+for (f in fls) {
+    system(sprintf("./Rnw2tex.R %s %d", f, n))
+}
+```

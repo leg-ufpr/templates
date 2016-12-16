@@ -1,0 +1,92 @@
+\definecolor{color1}{HTML}{FFFFFF}
+\definecolor{color2}{HTML}{DDDDDD}
+\definecolor{color3}{HTML}{333333}
+
+\tikzstyle{decision} = [diamond, aspect=1.5, draw, fill=color3, text=white,
+    text width=5em, text badly centered, node distance=3.5cm, inner sep=1pt]
+\tikzstyle{term} = [rectangle, draw, fill=color1, text=color3,
+    text width=5em, text centered, rounded corners = 1em, minimum height=2em]
+\tikzstyle{block} = [rectangle, draw, fill=color2, 
+    text width=7.5em, text centered, rounded corners, minimum height=3em]
+\tikzstyle{line} = [draw, -latex', line width=1pt, rounded corners]
+\tikzstyle{lineyn} = [line, auto]
+
+\tikzset{
+    cir/.style={draw, circle, fill, inner sep=1pt, text=white},
+}
+
+\begin{tikzpicture}
+
+\def\nao{n\~{a}o}
+\def\sim{sim}
+
+\begin{scope}
+
+\node (ini) at (0,0) [term] {in\'{i}cio};
+
+\node (faz) [block, align=left, right=1cm of ini] {
+  Fazer:\\ $x = [1, 2, 3]$;\\ $p = [0.1, 0.3, 0.6]$;\\ $i = 1$;\\ $P = p[i]$\\ $u = \text{unif}(0,1)$;};
+\path [line] (ini) -- (faz);
+
+\node (uni) [decision, below=2em of faz] {$u < P$};
+\path [line] (faz) -- (uni);
+
+\node (exit) [block, below=1cm of uni] {Retornar:\\ $x[i]$};
+\path [lineyn] (uni) -- node {\sim} (exit);
+
+\node (fim) [term, left=1cm of exit] {fim};
+\path [line] (exit) -- (fim);
+
+\node (redo) [block, left=1cm of uni] {$i = i + 1$;\\ $P = P + p[i]$;};
+\path [lineyn] (uni) -- node[above] {\nao} (redo);
+\path [lineyn] (redo) |- ($(faz)!0.55!(uni)$);
+
+\end{scope}
+
+% \begin{scope}[xshift=8cm]
+% 
+% \node (ini) at (0,0) [term] {in\'{i}cio};
+% 
+% \node (faz) [block, align=left, right=1cm of ini] {
+%   Fazer:\\ $x = [1, 2, 3]$;\\ $p = [0.1, 0.3, 0.6]$;\\ $i = 3$;\\ $P = 1 - p[i]$\\ $u = \text{unif}(0,1)$;};
+% \path [line] (ini) -- (faz);
+% 
+% \node (uni) [decision, below=2em of faz] {$u \geq P$};
+% \path [line] (faz) -- (uni);
+% 
+% \node (exit) [block, below=1cm of uni] {Retornar:\\ $x[i]$};
+% \path [lineyn] (uni) -- node {\sim} (exit);
+% 
+% \node (fim) [term, left=1cm of exit] {fim};
+% \path [line] (exit) -- (fim);
+% 
+% \node (redo) [block, left=1cm of uni] {$i = i - 1$;\\ $P = P - p[i]$;};
+% \path [lineyn] (uni) -- node[above] {\nao} (redo);
+% \path [lineyn] (redo) |- ($(faz)!0.55!(uni)$);
+% 
+% \end{scope}
+
+\begin{scope}[xshift=8cm]
+
+\node (ini) at (0,0) [term] {in\'{i}cio};
+
+\node (faz) [block, align=left, right=1cm of ini] {
+  Fazer:\\ $x = [3, 2, 1]$;\\ $p = [0.6, 0.3, 0.1]$;\\ $i = 1$;\\ $P = p[i]$\\ $u = \text{unif}(0,1)$;};
+\path [line] (ini) -- (faz);
+
+\node (uni) [decision, below=2em of faz] {$u < P$};
+\path [line] (faz) -- (uni);
+
+\node (exit) [block, below=1cm of uni] {Retornar:\\ $x[i]$};
+\path [lineyn] (uni) -- node {\sim} (exit);
+
+\node (fim) [term, left=1cm of exit] {fim};
+\path [line] (exit) -- (fim);
+
+\node (redo) [block, left=1cm of uni] {$i = i + 1$;\\ $P = P + p[i]$;};
+\path [lineyn] (uni) -- node[above] {\nao} (redo);
+\path [lineyn] (redo) |- ($(faz)!0.55!(uni)$);
+
+\end{scope}
+
+\end{tikzpicture}
