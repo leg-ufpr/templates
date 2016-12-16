@@ -116,6 +116,7 @@ a <- sapply(L,
             })
 A <- randomize(a)
 
+jackknife_sd <- solution(A)
 @
 
 Considere a tabela abaixo com os valores de uma amostra aleatória de
@@ -151,7 +152,7 @@ cat(formatitems(x = A$items, digits = 4), sep = "\n")
 
   \begin{onlysolution}
     \begin{solution}
-     \Sexpr{solution(A)}
+     \Sexpr{jackknife_sd}
     \end{solution}
   \end{onlysolution}
 

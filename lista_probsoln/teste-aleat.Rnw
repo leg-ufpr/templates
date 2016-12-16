@@ -25,6 +25,8 @@ factorial(8)/(factorial(4))
 
 p <- round(c(6/70, 3/70, 2/70, 4/70, 0), 4)
 A <- randomize(p)
+
+teste_aleat <- solution(A)
 @
 
 Assuma que os valores abaixo foram extraídos de forma aleatória de duas
@@ -53,7 +55,7 @@ cat(formatitems(x = A$items, digits = 4), sep = "\n")
 
   \begin{onlysolution}
     \begin{solution}
-      \Sexpr{solution(A)}
+      \Sexpr{teste_aleat}
     \end{solution}
   \end{onlysolution}
 

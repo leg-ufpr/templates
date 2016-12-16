@@ -14,6 +14,7 @@ args <- commandArgs(trailingOnly = TRUE)
 
 # args <- c("estat_basica/PR_arvore.Rnw", "estat_basica/PR_circuito.Rnw", 1)
 # args <- c("estat_basica/PR_arvoreProbDoencas.Rnw", 1)
+# args <- c("gna-expon.Rnw", "teste-aleat.Rnw", 1)
 
 usage <- '
 Usage:
@@ -43,10 +44,10 @@ somefiles <- sapply(args, file.exists)
 files <- args[somefiles]
 
 #--------------------------------------------
-# Packages.
+# Pacotes.
 
-require(xtable)
-require(knitr)
+library(xtable)
+library(knitr)
 
 #--------------------------------------------
 
@@ -60,6 +61,24 @@ path <- dirname(normalizePath(files[1]))
 lines <- lapply(files, readLines)
 
 if (length(files) > 1) {
+
+    lines <- lapply(lines,
+                    FUN = function(x) {
+                        ptr <- "(begin|end)\\{(onlysolution|solution)\\}"
+                        r <- grep(ptr, x)
+                        i <- seq(min(r), max(r), by = 1)
+                        j <- setdiff(i, r)
+                        if (length(j)) {
+                            sol <- c("\\item\n", x[j])
+                        } else {
+                            sol <- c("\\item\n", "")
+                        }
+                        return(list(problem = x[-i],
+                                    solution = sol))
+                    })
+    solut <- unlist(lapply(lines, "[[", "solution"))
+
+    lines <- lapply(lines, "[[", "problem")
     lines <- lapply(lines,
                     FUN = function(x) {
                         i <- grep("\\\\begin\\{defproblem\\}", x = x)
@@ -71,8 +90,10 @@ if (length(files) > 1) {
                                     value = c("\\end{ex}\n\n"),
                                     after = j - 1)
                         return(x)
-                })
+                    })
+
     lines <- do.call(c, lines)
+
     name <- gsub(pattern = "^\\\\begin\\{defproblem\\}\\{(.*)_SEED_\\}",
                  replacement =  "\\1",
                  x = grep("^\\\\begin\\{defproblem\\}\\{.*\\}",
@@ -83,7 +104,15 @@ if (length(files) > 1) {
     lines <- c(sprintf("\\begin{defproblem}{%s}",
                        paste0(name, "_SEED_", collapse = "")),
                lines,
+               "\\begin{onlysolution}",
+               "\\begin{solution}",
+               "\\begin{enumerate}[1.]",
+               solut,
+               "\\end{enumerate}",
+               "\\end{solution}",
+               "\\end{onlysolution}",
                "\\end{defproblem}")
+    # cat(lines, sep = "\n")
     cat(lines, sep = "\n",
         file = sprintf("%s/%s.Rnw", path, name))
     rl0 <- lines
