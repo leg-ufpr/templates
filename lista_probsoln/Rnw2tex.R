@@ -77,7 +77,7 @@ if (length(files) > 1) {
                  replacement =  "\\1",
                  x = grep("^\\\\begin\\{defproblem\\}\\{.*\\}",
                           x = lines, value = TRUE))
-    name <- paste(name, collapse = "_")
+    name <- paste(name, collapse = "--")
     lines <- grep("^\\\\(begin|end)\\{defproblem\\}",
                   x = lines, value = TRUE, invert = TRUE)
     lines <- c(sprintf("\\begin{defproblem}{%s}",
