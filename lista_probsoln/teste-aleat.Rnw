@@ -1,0 +1,60 @@
+\begin{defproblem}{teste-aleat_SEED_}
+
+<<include = FALSE>>=
+source("./funs.R")
+seed <- as.integer("_SEED_")
+if (isTRUE(seed >= 0)) {
+    set.seed(seed)
+} else {
+    set.seed(999)
+    # set.seed(1)
+}
+
+# FONTE: http://davidmlane.com/hyperstat/B163065.html
+i <- sample(0:2, 1)
+p1 <- c(7, 8, 11, 14)
+p2 <- c(0, 2, 5, 9)
+
+da <- cbind("Pop 1" = p1, "Pop 2" = p2) + i
+da <- addmargins(da, margin = 1, FUN = mean)
+rownames(da) <- c(1:4, "Média")
+
+# Número de combinações.
+factorial(8)/(factorial(4)^2)
+factorial(8)/(factorial(4))
+
+p <- round(c(6/70, 3/70, 2/70, 4/70, 0), 4)
+A <- randomize(p)
+@
+
+Assuma que os valores abaixo foram extraídos de forma aleatória de duas
+populações indepependentes. Aplique um teste de aleatorização para
+testar a hipótese $H_0$ de que as duas populações tem a mesma média
+contra a hipótese alternativa $H_1$ que estabelece que as populações tem
+médias diferentes. O $p$-valor do teste é?
+
+<<echo = FALSE, results = "asis">>=
+library(xtable)
+# args(print.xtable)
+cat("\\begin{center}\n")
+print(xtable(da),
+      hline.after = c(-1, 0, nrow(da) - 0:1),
+      floating = FALSE,
+      comment = FALSE,
+      timestamp = FALSE)
+cat("\\end{center}\n")
+@
+
+\begin{inparaenum}[a)]
+<<echo = FALSE, results = "asis">>=
+cat(formatitems(x = A$items, digits = 4), sep = "\n")
+@
+\end{inparaenum}
+
+  \begin{onlysolution}
+    \begin{solution}
+      \Sexpr{solution(A)}
+    \end{solution}
+  \end{onlysolution}
+
+\end{defproblem}

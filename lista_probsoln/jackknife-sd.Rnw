@@ -1,0 +1,158 @@
+\begin{defproblem}{jackknife-sd_SEED_}
+
+<<include = FALSE>>=
+source("./funs.R")
+seed <- as.integer("_SEED_")
+if (isTRUE(seed >= 0)) {
+    set.seed(seed)
+} else {
+    set.seed(1)
+}
+
+#-----------------------------------------------------------------------
+# Dados.
+
+# Brian Manly. Randomization, Bootstrap and Monte Carlo Methods in
+# Biology. Página 27.
+# amost <- c(3.56, 0.69, 0.1, 1.84, 3.93, 1.25, 0.18, 1.13, 0.27, 0.5, 0.67,
+#            0.01, 0.61, 0.82, 1.7, 0.39, 0.11, 1.2, 1.21, 0.72)
+# n <- 20
+
+# Amostra de tamanho 10 de uma população.
+n <- 8
+amost <- round(sort(rnorm(n = n, mean = 10, sd = 1)), 2)
+
+sdpop <- function(x) {
+    x <- x[!is.na(x)]
+    sqrt(sum((x - mean(x))^2)/length(x))
+}
+
+# sdpop(amost)
+sd0 <- sdpop(amost)
+lsd0 <- log(sd0)
+
+M <- sapply(amost, rep, each = n)
+diag(M) <- NA
+M <- rbind(amost, M)
+rownames(M) <- c(0, -(1:n))
+colnames(M) <- 1:n
+
+pvs <- apply(M,
+             MARGIN = 1,
+             FUN = function(x) {
+                 sd1 <- sdpop(x)
+                 pv <- n * sd0 - (n - 1) * sd1
+                 lsd1 <- log(sd1)
+                 lpv <- n * lsd0 - (n - 1) * lsd1
+                 r <- c("SD" = sd1,
+                        "PV" = pv,
+                        "lnSD" = lsd1,
+                        "lnPV" = lpv)
+                 return(round(r, 3))
+             })
+
+pvs <- t(pvs)
+pvs[1, c(2, 4)] <- NA
+pvs <- pvs[, 1:2]
+
+tab <- as.data.frame(cbind(M, pvs))
+names(tab)
+
+#-----------------------------------------------------------------------
+# Resultados.
+
+q <- round(qt(0.975, df = n - 1), 2)
+L <- vector(mode = "list", length = 5)
+
+# i <- c("PV", "lnPV")
+i <- c("PV")
+L[[1]] <- apply(cbind(tab[-1, i]),
+                MARGIN = 2,
+                FUN = function(x) {
+                    m <- mean(x)
+                    s <- sd(x)/sqrt(length(x))
+                    ic <- m + c(lwr = -1, upr = 1) * q * s
+                    return(c(estm = m, stdr = s, ic))
+                })
+L[[2]] <- apply(cbind(tab[-1, i]),
+                MARGIN = 2,
+                FUN = function(x) {
+                    m <- mean(x)
+                    # BUG não divide por sqrt(n).
+                    s <- sd(x)
+                    ic <- m + c(lwr = -1, upr = 1) * q * s
+                    return(c(estm = m, stdr = s, ic))
+                })
+L[[3]] <- apply(cbind(tab[-1, i]),
+                MARGIN = 2,
+                FUN = function(x) {
+                    m <- mean(x)
+                    s <- sd(x)/sqrt(length(x))
+                    # BUG usa 1.96 de quantil.
+                    ic <- m + c(lwr = -1, upr = 1) * 1.96 * s
+                    return(c(estm = m, stdr = s, ic))
+                })
+L[[4]] <- apply(cbind(tab[-1, i]),
+                MARGIN = 2,
+                FUN = function(x) {
+                    # Usa o SD estimado com todos.
+                    m <- tab[1, "SD"]
+                    s <- sd(x)/sqrt(length(x))
+                    ic <- m + c(lwr = -1, upr = 1) * q * s
+                    return(c(estm = m, stdr = s, ic))
+                })
+L[[5]] <- apply(cbind(tab[-1, i]),
+                MARGIN = 2,
+                FUN = function(x) {
+                    # BUG usa a média dos SD_{-i}.
+                    m <- mean(tab[-1, "SD"])
+                    s <- sd(x)/sqrt(length(x))
+                    ic <- m + c(lwr = -1, upr = 1) * q * s
+                    return(c(estm = m, stdr = s, ic))
+                })
+a <- sapply(L,
+            FUN = function(x) {
+                sprintf("(%0.3f, %0.3f)", x[3], x[4])
+            })
+A <- randomize(a)
+
+@
+
+Considere a tabela abaixo com os valores de uma amostra aleatória de
+tamanho $\Sexpr{n}$. Com essa amostra, deseja-se fazer inferência sobre
+o desvio-padrão da população. Na tabela é exibida a amostra completa na
+primeira linha e as amostras sem uma observação nas linhas
+seguintes. Nas quatro últimas colunas da tabela estão a estimativa
+parcial do desvio padrão da amostra (SD) e o pseudo-valor (PV).
+
+Calcule a estimativa pontual Jackknife e o erro padrão
+correspondente. Obtenha o intervalo de confiança para o desvio padrão da
+população. Dado: $t_{95\%, \Sexpr{n - 1}} = \Sexpr{q}$.
+
+<<echo = FALSE, results = "asis">>=
+library(xtable)
+# args(print.xtable)
+cat("\\begin{center}\n")
+print(xtable(tab),
+      hline.after = c(-1, 0, nrow(tab)),
+      floating = FALSE,
+      include.rownames = FALSE,
+      comment = FALSE,
+      math.style.negative = TRUE,
+      timestamp = FALSE)
+cat("\\end{center}\n")
+@
+
+\begin{inparaenum}[a)]
+<<echo = FALSE, results = "asis">>=
+cat(formatitems(x = A$items, digits = 4), sep = "\n")
+@
+\end{inparaenum}
+
+  \begin{onlysolution}
+    \begin{solution}
+     \Sexpr{solution(A)}
+    \end{solution}
+  \end{onlysolution}
+
+\end{defproblem}

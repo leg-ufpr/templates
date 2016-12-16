@@ -1,0 +1,30 @@
+\begin{defproblem}{monte-carlo-especiais_SEED_}
+
+  % http://stats.stackexchange.com/questions/104040/
+  % resampling-simulation-methods-monte-carlo-bootstrapping-jackknifing-cross
+
+  Discuta a afimação: ``Testes de Aleatorização e testes Bootstrap podem
+  ser vistos como casos especiais de testes Monte Carlo''.
+
+  \begin{onlysolution}
+    \begin{solution}
+
+      Ver: Manly, B. \textit{Randomization, Bootstrap and Monte Carlo
+        Methods in Biology}. Página 18, Chapter Summary.
+
+      O teste Monte Carlo é definido como um no qual uma estatística de
+      teste observada calculada a partir de um conjunto de dados é
+      comparada com a distribuição dessa estatística obtida pela geração
+      de conjuntos de dados alternativos assumindo algum modelo. Por
+      esta definição, testes de aleatórização e testes bootstrap são
+      casos especiais de testes Monte Carlo. No teste de aleatorização
+      se faz amostra sem reposição da população e no bootstrap a
+      amostragem é com reposição. Assume-se, por exemplo, no teste de
+      aleatorização para a diferença de médias que, se hipótese nula for
+      verdadeira, permutar os dados nada mais é que gerar um conjunto de
+      dados alternativo.
+
+    \end{solution}
+  \end{onlysolution}
+
+\end{defproblem}

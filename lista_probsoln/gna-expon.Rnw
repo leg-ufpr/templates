@@ -1,0 +1,75 @@
+\begin{defproblem}{gna-expon_SEED_}
+
+<<include = FALSE>>=
+source("./funs.R")
+seed <- as.integer("_SEED_")
+if (isTRUE(seed >= 0)) {
+    set.seed(seed)
+} else {
+    set.seed(999)
+    # set.seed(1)
+}
+
+# Extrai lambda,  gera U e calcula X.
+lambda <- sample(2:4, 1)
+u <- round(sort(runif(16)), 3)
+x <- round(-log(1 - u)/lambda, 4)
+
+# Cria as alternativas.
+l <- list(2:3, 5:6, 8:9, 11:12, 14:15)
+breaks <- sapply(l, function(i) mean(x[i]))
+answer <- sapply(l, min)
+
+# i <- sample(1:length(breaks))
+i <- sample(1:length(answer))
+A <- randomize(answer[i])
+
+br <- breaks[i[1]]
+
+A$items[A$correct]
+stopifnot(sum(x <= breaks[i[1]]) == A$items[A$correct])
+stopifnot(sum(u < 1 - exp(-lambda * br)) == A$items[A$correct])
+
+# A$items <- answer[A$items]
+solution(A)
+# u <= 1 - exp(-lambda * breaks[i[1]])
+
+@
+
+%--------------------------------------------
+
+Considere o gerador de números aleatórios da distribuição exponencial
+pelo método da transformação integral da probabilidade e o conjunto de
+número aleatórios uniformes ordenados dado abaixo.  Estes números
+uniformes são usados para gerar números de
+$X \sim \text{Exp}(\lambda = \Sexpr{lambda})$. Destes números produzidos
+de $X$, quantos estão no intervalo $[0, \Sexpr{br}]$?
+
+<<echo = FALSE, results = "asis">>=
+library(xtable)
+# args(print.xtable)
+cat("\\begin{center}\n")
+print(xtable(matrix(u, nrow = 2, byrow = TRUE)),
+      hline.after = NULL,
+      floating = FALSE,
+      include.colnames = FALSE,
+      include.rownames = FALSE,
+      comment = FALSE,
+      timestamp = FALSE)
+cat("\\end{center}\n")
+
+@
+
+\begin{inparaenum}[a)]
+<<echo = FALSE, results = "asis">>=
+cat(formatitems(x = A$items, digits = 0), sep = "\n")
+@
+\end{inparaenum}
+
+  \begin{onlysolution}
+    \begin{solution}
+      \Sexpr{solution(A)}
+    \end{solution}
+  \end{onlysolution}
+
+\end{defproblem}
