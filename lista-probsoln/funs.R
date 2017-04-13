@@ -64,9 +64,9 @@ formatitems <- function(x,
 #' @return Um vetor com \code{n+1} elementos, sendo o primeiro o valor
 #'     passo em \code{target} e os demais, as alternativas geradas.
 #' @examples
-#' 
+#'
 #' candidates(target = 0.25, n = 5, range = 0:1, mindiff = diff(range)/20)
-#' 
+#'
 #' apply(replicate(50, candidates(target = 0.5, n = 5, range = 0:1, mindiff = diff(range)/20)), 2,
 #'       function(x) {min(diff(sort(x)))})
 candidates <- function(target,
@@ -89,4 +89,52 @@ candidates <- function(target,
         if (i > 50) break
     }
     return(x)
+}
+
+#' @param prefix Uma string para ser o prefixo do nome aleatório.
+#' @return Uma string com sufixo aleatório. Essa string pode ser usada
+#'     como nome de objeto para guardar a resposta de cada exercício.
+#' @examples
+#'
+#' x <- tmpname()
+#' assign(x = x, value = 100)
+#' ls()
+#' get(x)
+#'
+tmpname <- function(prefix = "answer") {
+    sub("/", "", tempfile(pattern = "answer", tmpdir = ""))
+}
+
+# função para colocar as alternativas dentro do ambiente tabular, melhor formatação dos resultados.
+intable <- function(x, type="1x4"){
+  #' @param x vetor de alternativas
+  #' @param type tipo de arranjo, 1x4, 2x2, 4x1.
+  switch(type,
+         "2x2" = paste("\n\\begin{tabular}{ll}",
+                       x[1],
+                       "&",
+                       x[3],
+                       "\\tabularnewline",
+                       x[2],
+                       "&",
+                       x[4],"\\end{tabular}\n"),
+         "1x4" = paste("\n\\begin{tabular}{llll}",
+                       x[1],
+                       "&", 
+                       x[2],
+                       "&",
+                       x[3],
+                       "&",
+                       x[4],
+                       "\\end{tabular}\n"),
+         "4x1" = paste("\n\\begin{tabular}{l}",
+                       x[1],
+                       "\\tabularnewline",
+                       x[2],
+                       "\\tabularnewline",
+                       x[3],
+                       "\\tabularnewline",
+                       x[4],
+                       "\\end{tabular}\n")
+         )
 }
