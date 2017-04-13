@@ -5,7 +5,7 @@ destination: >
 author:
   - Walmes Marques Zeviani
   - Tutor do PET Estatística
-date: "Curitiba, 20 de Outubro de 2016"
+date: 'Curitiba, `r format(Sys.Date(), format = "%d de %B de %Y")`'
 closing: >
   Agradecemos pela disponibilidade.\newline
   Cordialmente,
