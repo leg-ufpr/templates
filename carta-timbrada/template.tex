@@ -1,0 +1,78 @@
+\documentclass[a4paper, 11pt]{letter}
+
+\usepackage[brazil]{babel}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[sc]{mathpazo}
+\usepackage{inconsolata}
+\usepackage{graphicx}
+
+\usepackage{lastpage}
+\usepackage{geometry}
+\geometry{lmargin=2.3cm, rmargin=2cm, tmargin=3cm, bmargin=3cm}
+
+\usepackage{indentfirst}
+\setlength{\parindent}{1.2cm}
+
+%=======================================================================
+
+\begin{document}
+
+\pagestyle{empty}
+
+\noindent
+\begin{minipage}[c]{0.2\textwidth}
+    \includegraphics[height=2cm]{../prova-ufpr/ufpr_logo.png}
+\end{minipage}
+% \hspace{1ex}
+\begin{minipage}[c]{0.75\textwidth}
+  \baselineskip 12pt
+  UNIVERSIDADE FEDERAL DO PARANÁ\\
+  DEPARTAMENTO DE ESTATÍSTICA\\
+  CURSO DE ESTATÍSTICA\\
+  PROGRAMA DE EDUCAÇÃO TUTORIAL
+\end{minipage}
+
+\vspace{2cm}
+
+$if(date)$
+  \noindent $date$\\
+  \vspace{1cm}
+$endif$
+
+$if(destination)$
+  \noindent $destination$\\
+  \vspace{1cm}
+$endif$
+
+  $body$
+
+  \vspace{1cm}
+  \begin{minipage}{1\textwidth}
+    $closing$
+  \end{minipage}
+  \vspace{0.3cm}
+
+  \noindent
+
+    \hspace{0.5\linewidth}
+    \begin{minipage}{0.49\linewidth}
+      \begin{center}
+
+        $if(digital-sign)$
+          \includegraphics[width=$if(digital-sign.width)$$digital-sign.width$$else$0.75\linewidth$endif$]{$digital-sign.path$}
+          $if(digital-sign.vspace)$\vspace{$digital-sign.vspace$}$endif$
+        $else$
+        \vspace{2cm}
+        $endif$
+
+        $if(author)$
+        $for(author)$\noindent $author$$sep$\newline $endfor$
+        $endif$
+        \newline
+
+      \end{center}
+
+  \end{minipage}
+
+\end{document}
