@@ -1,8 +1,8 @@
 ---
-title: "A brief introduction to GAMLSS"
-author: "Luiz Ricardo Nakamura (ESALQ/USP)"
-date: "10 de Novembro de 2016 - 16h - LEG"
-key-words: "Generalized Additive Models, GAMLSS."
+title: "Analysis of grouped count data in a longitudinal study with an application in flowering of sweet orange"
+author: "Prof. Idemauro A. R. de Lara (ESALQ/USP)"
+date: "28 de Abril de 2016 - 14h - LEG - Sala 232"
+#key-words: "Generalized Additive Models, GAMLSS."
 output:
   pdf_document:
     template: template.tex
@@ -10,17 +10,16 @@ output:
 
 <!-- Escreva aqui o resumo do seminário. -->
 
-In all fields of science and technology the amount of data are growing
-rapidly. Analysing them can be more challenging than ever and hence
-powerful models should be used. In this sense, Rigby and Stasinopoulos
-(2005) proposed the generalised additive models for location, scale and
-shape (GAMLSS). GAMLSS are really flexible semi-parametric regression
-models that involve a distribution for the response variable (that does
-not necessarily belongs to the exponential family) and may involve
-parametric linear and/or non-parametric smoothing terms when modelling
-any or all of the parameters of the distribution as functions of
-explanatory variables. This talk will be a basic exposition about the
-GAMLSS models and how it can be applied in real life examples, using the
-R package.
+The orange variety “x11” is a spontaneous mutant of sweet orange and 
+has the property of a short juvenile period with early flowering. The 
+data this work, refer to a randomized design, intending to assess the 
+plants' flowering when grafted on to two varieties of rootstock. On 
+each occasion, the number of branches per plant was counted and 
+classified into four mutually exclusive flowering categories. We used 
+the methodology of Generalized Linear Mixed Models to allow for 
+excessive heterogeneity and include serial dependence among 
+observations from the same plant. The results showed that there are 
+significant differences in the classification of branches over the four 
+seasons, with an interaction between season and branch categorizations.
 
 <!------------------------------------------- -->
