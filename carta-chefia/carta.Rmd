@@ -1,17 +1,26 @@
 ---
 chefe: "Prof. Jomar Antonio Camarinha Filho"
 author: "Prof. Walmes Marques Zeviani"
-date: "Curitiba, 20 de Outubro de 2016"
+date: "Curitiba, 21 de Fevereiro de 2018"
 motivo: "Comunica viagem"
 closing: "Atensiosamente"
-digital-sign: assinatura.jpg
+#digital-sign: assinatura.jpg
 output:
   pdf_document:
     template: template.tex
+    keep_tex: true
 ---
 
 <!-- Escreva aqui o resumo do seminário. -->
 
-\lipsum[1-2]
+Comunico que estarei ausente do Departamento no intervalo de 21 à
+26/02/2018 para ministrar o curso *Web Scraping com o R* para o
+servidores do Conselho Nacional de Justiça (CNJ) em Brasília/DF.
+
+Informo que foram tomadas as devidas providências para que não haja
+prejuízo nas atividades regulares em nossa Universidade, havendo os
+alunos da disciplina de *Pesquisa Reproduzível* sido avisados da
+referida ausência e da minha substituição pelo professor Fernando Mayer
+que atenderá pelas atividades de ensino neste período.
 
 <!------------------------------------------- -->
