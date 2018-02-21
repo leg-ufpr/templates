@@ -8,6 +8,9 @@
 \usepackage{graphicx}
 \usepackage{lipsum}
 
+\usepackage{indentfirst}
+\setlength{\parindent}{1.5cm}
+
 \usepackage{lastpage}
 \usepackage{geometry}
 \geometry{lmargin=2.3cm, rmargin=2cm, tmargin=3cm, bmargin=3cm}
@@ -18,15 +21,14 @@
 
 \pagestyle{fancy}
 \headsep = 2cm  % espaço entre header e texto
-\lhead{\includegraphics[width=70pt]{UFPR.ps}}
-\rhead{\includegraphics[width=100pt]{leglogo.ps}}
-\chead{\tiny \bf MINISTÉRIO DA EDUCAÇÃO \\
+\lhead{\includegraphics[height=60pt]{../prova-ufpr/ufpr_logo.png}}
+\rhead{\includegraphics[height=60pt]{../seminario-leg/leg.pdf}}
+\chead{\footnotesize \bf MINISTÉRIO DA EDUCAÇÃO \\
   UNIVERSIDADE FEDERAL DO PARANÁ \\
   SETOR DE CIÊNCIAS EXATAS \\
   DEPARTAMENTO DE ESTATÍSTICA \\
   LABORATÓRIO DE ESTATÍSTICA E GEOINFORMAÇÃO}
 \cfoot{}
-
 
 $if(title)$
   \title{$title$}
@@ -50,48 +52,36 @@ $endif$
 
 \begin{document}
 
-% \pagestyle{empty}
-
-% \makeatletter
-% \begin{center}
-%   % \includegraphics[width=3cm]{leg.pdf}\\
-%   \Large{Seminários do LEG}\\[10ex]
-%   % {\huge \bfseries  \@title }\\[2ex]
-%   {\LARGE  \@author}\\[2ex]
-%   {\Large \@date}
-% \end{center}
-% \makeatother
-%
-% $body$ %%---------------------------------------------------------------
-
 \begin{letter} {REF: $motivo$}
 
-  \opening{$chefe$ \\
+  \opening{
+    \noindent $chefe$ \\
     Chefe do Departamento de Estatística \\
     Setor de Ciências Exatas \\
     Universidade Federal do Paraná }
 
-  % \pagestyle{fancy}
-  % \thispagestyle{fancy}
+  \pagestyle{fancy}
+  \thispagestyle{fancy}
 
   \hspace{3cm}
 
   $body$
 
   \vspace{0.3cm}
-  \hspace{1cm}
   $closing$
   \vspace{0.3cm}
 
-  \begin{minipage}{1\linewidth}
+  \hfill\begin{minipage}{0.5\linewidth}
     % \flushright{\includegraphics[width=0.3\textwidth]{assi}}
     $if(digital-sign)$
     \flushright{\includegraphics[width=0.5\linewidth]{$digital-sign$}}
     $else$
     \vspace{2cm}
+    \rule{\textwidth}{0.5pt}
     $endif$
-    \flushright{{\it $author$\\
+    \centering{{\it $author$\\
         \mbox{Laborat\'orio de Estat\'{\i}stica e Geoinforma\c{c}\~ao}\\
+        \mbox{Departamento de Estatística}\\
         UFPR}}
   \end{minipage}
   %\hspace{0.1\linewidth}
