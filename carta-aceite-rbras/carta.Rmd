@@ -1,25 +1,31 @@
 ---
-title: "Carta de Aceite de Trabalho"
+title: >
+  \uppercase{Carta de Aceite de Trabalho}
 to: "Ilmo(s) Sr(s) Marcos Oliveira Prates"
 author: >
   Prof. Dr. Walmes Marques Zeviani\newline
   Departamento de Estatística - UFPR\newline
   Coordenador da 63\textsuperscript{a} RBras\newline
 date: "Curitiba, 07 de Março de 2018"
-closing: "Atensiosamente"
-#digital-sign: assinatura.jpg
+closing: "Atensiosamente,"
+# digital-sign: >
+#   \vspace*{2em}
+#   \centering{\includegraphics[scale = 0.5]{assinatura.jpg}}
+#   \vspace*{-2.75em}
 output:
   pdf_document:
     template: template.tex
-    keep_tex: true
+    keep_tex: false
 ---
 
-É com satisfação que comunicamos que seu trabalho intitulado "**Spatial
-Extreme Learning Machines: An Application on Prediction of Disease
-Counts**" foi aceito para apresentação no evento 63\textsuperscript{a}
-RBRAS - 2018 que será realizado em Curitiba no período de 23 a 25 de
-Maio.  Os horários e instruções para a apresentação serão divulgados na
-homepage do evento oportunamente (*rbras.org.br/rbras63/*). Caso o
+É com satisfação que comunicamos que seu trabalho intitulado
+"**Spatial Extreme Learning Machines: An Application on Prediction of Disease Counts**"
+foi aceito para apresentação na 63\textsuperscript{a} Reunião Anual da
+Região Brasileira da Sociedade Internacional de Biometria (RBras)
+que será realizado em Curitiba no período de 23 a 25 de
+Maio de 2018.  Os horários e instruções para a apresentação dos
+trabalhos serão divulgados na
+*homepage* do evento oportunamente (*rbras.org.br/rbras63/*). Caso o
 apresentador do trabalho ainda não tenha pago sua inscrição no evento,
 solicitamos que o faça com a maior brevidade.
 
