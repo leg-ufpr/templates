@@ -10,6 +10,21 @@
 \usepackage{geometry}
 \geometry{lmargin=2.3cm, rmargin=2cm, tmargin=3cm, bmargin=3cm}
 
+\usepackage{background}
+\backgroundsetup{%
+  scale = 1,       %% change accordingly
+  angle = 0,       %% change accordingly
+  opacity = 0.20,  %% change accordingly
+  color = black,   %% change accordingly
+  contents = {
+    \begin{tikzpicture}[remember picture, overlay]
+      \node at ([yshift = 4cm, xshift = 0pt]current page.center) {
+        \includegraphics[width = 0.85\textwidth]{rbras-background.png}};
+    \end{tikzpicture}}
+}
+
+\usepackage[onehalfspacing]{setspace}
+
 \usepackage{fancyhdr}
 \addtolength{\headheight}{\baselineskip}
 \renewcommand{\footrulewidth}{0.5pt}
@@ -33,35 +48,36 @@
 
 \begin{letter}{}
 
-  $if(date)$\hfill $date$ \vspace{2em}$endif$
+  $if(date)$\hfill $date$ \vspace{1em}$endif$
 
   $if(title)${\begin{center} $title$ \end{center}}$endif$
 
-  \opening{$to$}
+  \opening{$to$,}
 
   \pagestyle{fancy}
   \thispagestyle{fancy}
 
-  \hspace{3cm}
+  \vspace{3em}
 
   \hspace{1.5cm}
   $body$
 
-  \vspace{0.3cm}
+  \vspace{3em}
   \hspace{1.5cm} $closing$
-  \vspace{0.3cm}
+  \vspace{1em}
 
   \hfill
   \begin{minipage}{0.5\linewidth}
 
     $if(digital-sign)$
-    \flushright{\includegraphics[width=0.5\linewidth]{$digital-sign$}}
+    $digital-sign$
     $else$
-    \vspace{2cm}
-    \rule{\textwidth}{0.5pt}
+    \vspace{3em}
     $endif$
 
     \begin{flushright}
+      \rule{\textwidth}{0.5pt}
+
       $author$
     \end{flushright}
 
