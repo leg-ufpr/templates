@@ -1,0 +1,51 @@
+---
+title: >
+  \uppercase{Recibo de inscrição}
+to: "Aos interessados"
+author: >
+  Prof. Dr. Walmes Marques Zeviani\newline
+  Departamento de Estatística - UFPR\newline
+  Coordenador da 63\textsuperscript{a} RBras\newline
+date: '`r format(Sys.Date(), "Curitiba, %d de %B de %Y")`'
+closing: "Cordialmente,"
+digital-sign: >
+  \vspace*{2em}
+  \centering{\includegraphics[scale = 1.1]{/home/walmes/Dropbox/documents/walmes-sign.png}}
+  \vspace*{-6em}
+output:
+  pdf_document:
+    template: template-inscricao.tex
+    keep_tex: false
+---
+
+```{r, include = FALSE}
+nome <- "Milene Regina dos Santos"
+valor <- c(
+    "R$ 140,00 (cento e quarenta reais)",
+    "R$ 180,00 (cento e oitenta reais)",
+    "R$ 220,00 (duzentos e vinte reais)",
+    "R$ 300,00 (trezentos reais)",
+    "R$ 350,00 (trezentos e cinquenta reais)",
+    "R$ 450,00 (quatrocentos e cinquenta reais)",
+    "R$ 900,00 (novecentos reais)"
+)
+```
+
+A Fundação de Apoio da Universidade Federal do Paraná para o
+Desenvolvimento da Ciência, da Tecnologia e da Cultura (FUNPAR, CNPJ
+78.350.188/0001-95) atesta que recebeu de
+`r nome` o valor de `r valor[7]`,
+referente ao pagamento de inscrição na
+63\textsuperscript{a} Reunião Anual da Região Brasileira da Sociedade
+Internacional de Biometria (RBras) que será realizada em Curitiba no
+período de 23 a 25 de Maio de 2018.
+
+<!-- .
+Recebemos de `r nome` o valor de `r valor[7]`,
+referente ao pagamento de sua inscrição na
+63\textsuperscript{a} Reunião Anual da Região Brasileira da Sociedade
+Internacional de Biometria (RBras) que será realizada em Curitiba no
+período de 23 a 25 de Maio de 2018.
+-->
+
+<!------------------------------------------- -->
