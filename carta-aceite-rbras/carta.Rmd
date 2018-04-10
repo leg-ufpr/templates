@@ -1,17 +1,17 @@
 ---
 title: >
   \uppercase{Carta de Aceite de Trabalho}
-to: "Ilmo(s) Sr(s) Marcos Oliveira Prates"
+to: "Wilhan Valasco do Santos"
 author: >
   Prof. Dr. Walmes Marques Zeviani\newline
   Departamento de Estatística - UFPR\newline
   Coordenador da 63\textsuperscript{a} RBras\newline
-date: "Curitiba, 07 de Março de 2018"
+date: '`r format(Sys.Date(), "Curitiba, %d de %B de %Y")`'
 closing: "Atensiosamente,"
-# digital-sign: >
-#   \vspace*{2em}
-#   \centering{\includegraphics[scale = 0.5]{assinatura.jpg}}
-#   \vspace*{-2.75em}
+digital-sign: >
+  \vspace*{2em}
+  \centering{\includegraphics[scale = 1.1]{/home/walmes/Dropbox/documents/walmes-sign.png}}
+  \vspace*{-6em}
 output:
   pdf_document:
     template: template.tex
@@ -19,12 +19,12 @@ output:
 ---
 
 É com satisfação que comunicamos que seu trabalho intitulado
-"**Spatial Extreme Learning Machines: An Application on Prediction of Disease Counts**"
+"**Padrões e métodos para análise da distribuição espacial de larva-minadora em cultivo de alface hidropônico**"
 foi aceito para apresentação na 63\textsuperscript{a} Reunião Anual da
 Região Brasileira da Sociedade Internacional de Biometria (RBras)
 que será realizado em Curitiba no período de 23 a 25 de
 Maio de 2018.  Os horários e instruções para a apresentação dos
-trabalhos serão divulgados na
+trabalhos, cursos e demais atividades serão divulgados na
 *homepage* do evento oportunamente (*rbras.org.br/rbras63/*). Caso o
 apresentador do trabalho ainda não tenha pago sua inscrição no evento,
 solicitamos que o faça com a maior brevidade.
