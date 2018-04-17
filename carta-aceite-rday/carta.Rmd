@@ -1,0 +1,21 @@
+---
+author: "Eduardo Elias Ribeiro Junior"
+title: "Criando websites com blogdown"
+type: 1 # em que {0 = inscricao, 1 = trabalho}
+date: '`r format(Sys.Date(), "Curitiba, %d de %B de %Y")`'
+closing: "Atensiosamente,"
+coordenador: "Prof. Dr. Walmes Marques Zeviani"
+# Controle o posicionamento da assinatura aqui.
+# digital-sign: >
+#   \vspace*{2em}
+#   \centering{\includegraphics[scale = 1.1]{path/to/your/signature.png}}
+#   \vspace*{-6em}
+output:
+  pdf_document:
+    template: template.tex
+    keep_tex: false
+---
+
+<!--
+Este documento não tem corpo.
+-->

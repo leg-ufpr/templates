@@ -1,0 +1,131 @@
+\documentclass[a4paper, 11pt]{letter}
+
+\usepackage[brazil]{babel}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[sc]{mathpazo}
+\usepackage{inconsolata}
+\usepackage{graphicx}
+
+\usepackage{geometry}
+\geometry{lmargin=3cm, rmargin=3cm, tmargin=4cm, bmargin=4cm}
+
+\usepackage{background}
+\backgroundsetup{%
+  scale = 1,       %% change accordingly
+  angle = 0,       %% change accordingly
+  opacity = 0.20,  %% change accordingly
+  color = black,   %% change accordingly
+  contents = {
+    \begin{tikzpicture}[remember picture, overlay]
+      \node at ([yshift = 2cm, xshift = 0pt]current page.center) {
+        \includegraphics[width = 0.75\textwidth]{r-day.png}};
+    \end{tikzpicture}}
+}
+
+% \usepackage[onehalfspacing]{setspace}
+\usepackage{setspace}
+\linespread{1.5}
+
+\usepackage{fancyhdr}
+\addtolength{\headheight}{\baselineskip}
+\renewcommand{\footrulewidth}{0.5pt}
+
+\pagestyle{fancy}
+\headsep = 3cm  % espaço entre header e texto
+\lhead{\includegraphics[height=50pt]{../prova-ufpr/ufpr_logo.png}}
+\rhead{\includegraphics[height=50pt]{leg.pdf}}
+\chead{\footnotesize \bf
+  MINISTÉRIO DA EDUCAÇÃO \\
+  UNIVERSIDADE FEDERAL DO PARANÁ \\
+  SETOR DE CIÊNCIAS EXATAS \\
+  DEPARTAMENTO DE ESTATÍSTICA\\
+  LABORATÓRIO DE ESTATÍSTICA E GEOINFORMAÇÃO}
+\cfoot{}
+
+\date{}
+
+$if(type)$\def\CARTATIPO{$type$}$endif$
+
+\def\COMPLEMENTO{
+  no \textbf{R Day}: Encontro nacional de usuários do R que será
+  realizado em Curitiba no dia 22 de Maio de 2018.  Os horários e
+  instruções para a apresentação das atividades serão divulgados na
+  \textit{homepage} do evento oportunamente em
+  \textit{http://rday.leg.ufpr.br}.
+}
+
+%=======================================================================
+
+\begin{document}
+
+\begin{letter}{}
+
+  $if(date)$\hfill $date$ \vspace{1em}$endif$
+
+
+  \ifx\CARTATIPO\undefined % -------------------------------------------
+  CARTA-TIPO-NULL
+  \else
+  \if\CARTATIPO1
+  % CARTA PARA ACEITE DE TRABALHO --------------------------------------
+  $if(type)${\begin{center} \uppercase{Carta de Aceite de Submissão} \end{center}}$endif$
+
+  \opening{$if(author)$$author$$else$AUTHOR-NULL$endif$,}
+
+  \vspace{3em}
+
+  \hspace{1.5cm}
+  É com satisfação que comunicamos que a sua submissão intitulada
+  $if(title)$``\textbf{$title$}''$else$TITLE-NULL$endif$
+  foi aceita para apresentação \COMPLEMENTO
+
+  \else
+  % CARTA PARA RECIBO DE INSCRIÇÃO -------------------------------------
+
+  $if(type)${\begin{center} \uppercase{Comprovação de Inscrição} \end{center}}$endif$
+
+  \opening{Aos interessados,}
+
+  \vspace{3em}
+
+  \hspace{1.5cm}
+  Atestamos que
+  $if(author)$\textbf{$author$}$else$AUTHOR-NULL$endif$
+  está inscrito \COMPLEMENTO
+
+  \fi
+  \fi
+
+  \vspace{3em}
+  \hspace{1.5cm} $closing$
+  \vspace{2em}
+
+  % Isso tem que estar depois de \opening{} para que seja aplicado.
+  \pagestyle{fancy}
+  \thispagestyle{fancy}
+
+  \hfill
+  \begin{minipage}{0.5\linewidth}
+
+    $if(digital-sign)$
+    $digital-sign$
+    $else$
+    \vspace{3em}
+    $endif$
+
+    \begin{flushright}
+      \rule{\textwidth}{0.5pt}
+
+      $coordenador$\newline
+      Laboratório de Estatística e Geoinformação\newline
+      Coordenador do R Day\newline
+    \end{flushright}
+
+  \end{minipage}
+
+  \vfill
+
+\end{letter}
+
+\end{document}
