@@ -8,18 +8,19 @@
 \usepackage{graphicx}
 
 \usepackage{geometry}
-\geometry{lmargin=3cm, rmargin=3cm, tmargin=4cm, bmargin=4cm}
+% \geometry{lmargin=3cm, rmargin=3cm, tmargin=4cm, bmargin=4cm}
 
 \usepackage{background}
 \backgroundsetup{%
   scale = 1,       %% change accordingly
   angle = 0,       %% change accordingly
-  opacity = 0.20,  %% change accordingly
+  opacity = 0.30,  %% change accordingly
   color = black,   %% change accordingly
   contents = {
     \begin{tikzpicture}[remember picture, overlay]
-      \node at ([yshift = 2cm, xshift = 0pt]current page.center) {
-        \includegraphics[width = 0.75\textwidth]{r-day.png}};
+      \node[yshift = 2cm, xshift = 0pt] at (current page.center) {
+        \includegraphics[width = 0.7\textwidth]{r-day.png}};
+        % \includegraphics[width = 0.6\textwidth]{leg.pdf}};
     \end{tikzpicture}}
 }
 
@@ -28,15 +29,15 @@
 \linespread{1.5}
 
 \usepackage{fancyhdr}
-\addtolength{\headheight}{\baselineskip}
+% \addtolength{\headheight}{\baselineskip}
 \renewcommand{\footrulewidth}{0.5pt}
 
 \pagestyle{fancy}
-\headsep = 3cm  % espaço entre header e texto
+\headsep = 2cm  % espaço entre header e texto
 \lhead{\includegraphics[height=50pt]{../prova-ufpr/ufpr_logo.png}}
 \rhead{\includegraphics[height=50pt]{leg.pdf}}
 \chead{\footnotesize \bf
-  MINISTÉRIO DA EDUCAÇÃO \\
+  % MINISTÉRIO DA EDUCAÇÃO \\
   UNIVERSIDADE FEDERAL DO PARANÁ \\
   SETOR DE CIÊNCIAS EXATAS \\
   DEPARTAMENTO DE ESTATÍSTICA\\
@@ -45,19 +46,11 @@
 
 \date{}
 
-
-\def\DATA{17 de Abril de 2018}
+\def\DATA{..hoje..}
 \def\CARTATIPO{..cartatipo..} % {0: comp. inscrição, 1: ac. submissão}
 \def\AUTOR{..autor..}         % Nome do autor.
 \def\TITULO{..titulo..}       % Título do trabalho, quando houver.
-\def\FECHAMENTO{Atensiosamente}
-\def\COORDENADOR{Prof. Walmes Marques Zeviani}
-\def\ASSINATURA{
-  \vspace*{2em}
-  % \centering{\includegraphics[scale = 1.1]{caminho/para/sua/assinatura.png}}
-  \centering{\tikz{\draw[dashed] (0, 0) rectangle node {SUA ASSINATURA AQUI} (6, 4);}}
-  \vspace*{-6em}
-}
+\def\FECHAMENTO{Atensiosamente,}
 
 \def\COMPLEMENTO{
   no \textbf{R Day}: Encontro nacional de usuários do R que será
@@ -86,7 +79,7 @@
 
   \opening{\AUTOR,}
 
-  \vspace{3em}
+  \vspace{1em}
 
   \hspace{1.5cm}
   É com satisfação que comunicamos que a sua submissão intitulada
@@ -101,7 +94,7 @@
 
   \opening{Aos interessados,}
 
-  \vspace{3em}
+  \vspace{1em}
 
   \hspace{1.5cm}
   Atestamos que \textbf{\AUTOR} está inscrito \COMPLEMENTO
@@ -109,7 +102,7 @@
   \fi
   \fi
 
-  \vspace{3em}
+  \vspace{2em}
   \hspace{1.5cm} \FECHAMENTO
   \vspace{2em}
 
@@ -117,17 +110,37 @@
   \pagestyle{fancy}
   \thispagestyle{fancy}
 
-  \hfill
-  \begin{minipage}{0.5\linewidth}
+  % Primeira assinatura.
+  \begin{minipage}[b]{0.45\linewidth}
 
-    \ASSINATURA
+    \vspace*{2em}
+    \centering{\includegraphics[scale = 0.9]{/home/walmes/Dropbox/RevoLEG/sign-fernando-mayer.png}}
+    % \centering{\tikz{\draw[dashed] (0, 0) rectangle node {SUA ASSINATURA AQUI} (6, 4);}}
+    \vspace*{-6em}
 
     \begin{flushright}
       \rule{\textwidth}{0.5pt}
 
-      \COORDENADOR\newline
-      Laboratório de Estatística e Geoinformação\newline
+      Prof. Fernando de Pol Mayer\newline
+      Lab. de Estatística e Geoinformação\newline
       Coordenador do R Day\newline
+    \end{flushright}
+
+  \end{minipage}
+  \hfill
+  \begin{minipage}[b]{0.45\linewidth}
+
+    \vspace*{2em}
+    \centering{\includegraphics[scale = 0.9]{/home/walmes/Dropbox/RevoLEG/sign-walmes-zeviani.png}}
+    % \centering{\tikz{\draw[dashed] (0, 0) rectangle node {SUA ASSINATURA AQUI} (6, 4);}}
+    \vspace*{-4em}
+
+    \begin{flushright}
+      \rule{\textwidth}{0.5pt}
+
+      Prof. Walmes Marques Zeviani\newline
+      Lab. de Estatística e Geoinformação\newline
+      Vice-coordenador do R Day\newline
     \end{flushright}
 
   \end{minipage}
